@@ -62,7 +62,6 @@ Ut[1:length(relU)] <- relU
 Ut[which(is.na(Ut))] <- 1
 Ut <- Ut * Umax
 
-# visualize for jim:
 set.seed(1)
 sim_dat <- sr_model(Ut = Ut) 
 
@@ -89,6 +88,7 @@ stan_data <-
     "E" = sim_dat$E,
     "C" = sim_dat$C[1:(length(sim_dat$C)-k)]
   )
+
 # compile the stan model
 path <- "src/ss-ricker-no-priors.stan"
 m <- rstan::stan_model(path, verbose = T)
@@ -104,7 +104,7 @@ fit <-
     verbose = TRUE
   )
 
-#
+# make a bunch of plots
 p1 <- fit %>%
   spread_draws(R[year]) %>%
   median_qi() %>%
