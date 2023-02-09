@@ -8,9 +8,6 @@ data {
   int<lower=0> n_year;
   vector[n_year] E;
   vector[n_year-k] C; 
-  // vector[k] ar_prior; 
-  // vector[k] ln_sdp_prior; 
-  // vector[k] ln_sdo_prior; 
 }
 parameters {
   real ar; 
@@ -37,11 +34,7 @@ transformed parameters {
  }
 }
 model {
-  // priors all vague by default
-  // ar ~ normal(ar_prior[1], ar_prior[2]); 
-  // ln_sdp ~ normal(ln_sdp_prior[1], ln_sdp_prior[2]);
-  // ln_sdo ~ normal(ln_sdo_prior[1], ln_sdo_prior[2]);
-  // ln_So ~ normal(ln_So_prior[1], ln_So_prior[2]);   
+  // priors all vague by default in Stan
   
   // likelihoods
   R ~ lognormal(mu, exp(ln_sdp));
